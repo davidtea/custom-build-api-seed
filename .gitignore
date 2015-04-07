@@ -5,3 +5,5 @@ venv
 .idea
 
 students/data.sqlite
+*.csv
+
