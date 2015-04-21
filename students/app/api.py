@@ -15,50 +15,68 @@ class ValidationError(ValueError):
     pass
 
 
-class Student(db.Model):
-    __tablename__ = 'students'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), index=True)
+class Question(db.Model):
+    __tablename__ = 'questions'
+    id = db.Column(db.Integer, primary_key=True) 
+    Show_Number = db.Column(db.Integer, index=True)
+    Air_Date = db.Column(db.String(32), index=True)
+    Round = db.Column(db.String(64), index=True)
+    Category = db.Column(db.String(128), index=True)
+    Value = db.Column(db.String(16), index=True)
+    Question = db.Column(db.String(256), index=True)
+    Answer = db.Column(db.String(256), index=True)
 
     def get_url(self):
-        return url_for('get_student', id=self.id, _external=True)
+        return url_for('get_question', id=self.id, _external=True)
 
     def export_data(self):
         return {
             'self_url': self.get_url(),
-            'name': self.name
+	    'Show Number': self.Show_Number, 
+	    'Air Date': self.Air_Date,
+	    'Round': self.Round, 
+	    'Category': self.Category,
+	    'Value': self.Value,
+	    'Question': self.Question, 
+	    'Answer': self.Answer 
         }
 
     def import_data(self, data):
         try:
-            self.name = data['name']
+            self.Show_Number = data['Show Number']
+	    self.Air_Date = data['Air Date']
+	    self.Round = data['Round']
+	    self.Category = data['Category']
+	    self.Value = data['Value']
+	    self.Question = data['Question']
+	    self.Answer = data['Answer']
         except KeyError as e:
-            raise ValidationError('Invalid student: missing ' + e.args[0])
+            raise ValidationError('Invalid question: missing ' + e.args[0])
         return self
 
 
-@app.route('/students/', methods=['GET'])
-def get_students():
-    return jsonify({'students': [student.get_url() for student in
-                                  Student.query.all()]})
+@app.route('/questions/', methods=['GET'])
+def get_questions():
+    return jsonify({'questions': [question.get_url() for question in
+                                  Question.query.all()]})
 
-@app.route('/students/<int:id>', methods=['GET'])
-def get_student(id):
-    return jsonify(Student.query.get_or_404(id).export_data())
+@app.route('/questions/<int:id>', methods=['GET'])
+def get_question(id):
+    return jsonify(Question.query.get_or_404(id).export_data())
 
-@app.route('/students/', methods=['POST'])
-def new_student():
-    student = Student()
-    student.import_data(request.json)
-    db.session.add(student)
+@app.route('/questions/', methods=['POST'])
+def new_question():
+    question = Question()
+    question.import_data(request.json)
+    db.session.add(question)
     db.session.commit()
-    return jsonify({}), 201, {'Location': student.get_url()}
+    return jsonify({}), 201, {'Location': question.get_url()}
 
-@app.route('/students/<int:id>', methods=['PUT'])
-def edit_student(id):
-    student = Student.query.get_or_404(id)
-    student.import_data(request.json)
-    db.session.add(student)
+@app.route('/questions/<int:id>', methods=['PUT'])
+def edit_question(id):
+    question = Question.query.get_or_404(id)
+    question.import_data(request.json)
+    db.session.add(question)
     db.session.commit()
     return jsonify({})
 
