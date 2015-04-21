@@ -41,7 +41,7 @@ Percentage of the requests served within a certain time (ms)
   99%    671
  100%    677 (longest request)
 ```
-#I chose -n 1000 -c 10 first because it seems like a standard test.
+**I chose -n 1000 -c 10 first because it seems like a standard test.**
 
 This is ApacheBench, Version 2.3 <$Revision: 1554214 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
@@ -86,8 +86,7 @@ Percentage of the requests served within a certain time (ms)
   99%   1962
  100%   1963 (longest request)
  ```
- # Next, I chose -n 1000 -c 100. I kept the total number of requests the same so that I could see the difference that concurrent requests makes on the
- # server. It looks like the increased concurrent requests didn't change the total request time by much.
+**Next, I chose -n 1000 -c 100. I kept the total number of requests the same so that I could see the difference that concurrent requests makes on the server. It looks like the increased concurrent requests didn't change the total request time by much.**
  
  
 This is ApacheBench, Version 2.3 <$Revision: 1554214 $>
@@ -133,5 +132,4 @@ Percentage of the requests served within a certain time (ms)
   99%    569
  100%    578 (longest request)
  ```
-# For the final test I chose -n 1000 -c 1 to see what would happen if requests were handled one at a time. It didn't change the total time much. All the 
-# tests were within ~0.1 secs of each other. It seems that the concurrent number of requests don't really affect the overall time.
+**For the final test I chose -n 1000 -c 1 to see what would happen if requests were handled one at a time. It didn't change the total time much. All the tests were within ~0.1 secs of each other. It seems that the concurrent number of requests don't really affect the overall time.**
