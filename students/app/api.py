@@ -1,11 +1,13 @@
 import os
-from flask import Flask, url_for, jsonify, request
+from flask import Flask, url_for, jsonify, request, render_template
+from flask.ext.bootstrap import Bootstrap
 from flask.ext.sqlalchemy import SQLAlchemy
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 db_path = os.path.join(basedir, '../data.sqlite')
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
 
 db = SQLAlchemy(app)
@@ -80,7 +82,17 @@ def edit_question(id):
     db.session.commit()
     return jsonify({})
 
+# todo: implement this template
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html')
+
+@app.route('/')
+def index():
+    highlight = {'min': 1, 'max': 2}
+    questions = Question.query.all()
+    return render_template('index.html', questions=questions, highlight=highlight)
 
 if __name__ == '__main__':
     db.create_all()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int("5000"), debug=True)

@@ -1,0 +1,46 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}List of Questions{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/">JEOPARDY Questions</a>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Questions</h1>
+        <table class="table table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Show Number</th>
+        <th>Air Date</th>
+        <th>Round</th>
+        <th>Category</th>
+        <th>Value</th>
+        <th>Question</th> 
+        <th>Answer</th>
+    </tr>
+    {% for question in questions %}
+    <tr>
+        <td>
+            {% set hl = question.id <= highlight['min'] %}
+            {% if hl %}<b>{% endif %}
+            {{ question.id }}
+            {% if hl %}</b>{% endif %}
+        </td>
+        <td>{{ question.Show_Number }}</td>
+        <td>{{ question.Air_Date }}</td>
+        <td>{{ question.Round }}</td>
+        <td>{{ question.Category }}</td>
+        <td>{{ question.Value }}</td>
+        <td>{{ question.Question }}</td>
+        <td>{{ question.Answer }}</td>
+    </tr>
+    {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
