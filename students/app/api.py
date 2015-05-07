@@ -89,10 +89,12 @@ def not_found(e):
 
 @app.route('/')
 def index():
-    highlight = {'min': 1, 'max': 2}
+    highlight = {'min': 1, 'max': 5}
     questions = Question.query.all()
     return render_template('index.html', questions=questions, highlight=highlight)
 
 if __name__ == '__main__':
     db.create_all()
-    app.run(host="0.0.0.0", port=int("5000"), debug=True)
+#    app.run( debug=True )
+    app.run(host="0.0.0.0", port=int("4000"), debug=True)
+#    Using Nitrous.io only allows ports to run on 0.0.0.0

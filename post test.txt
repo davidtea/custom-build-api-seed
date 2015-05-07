@@ -1,0 +1,8 @@
+curl -i -H 'Content-Type: application/json' -H 'Accept: aplication/json' -X POST -d '{"Show Number":"4680","Air Date":"2004-12-31","Round":"Jeopardy!","Category":"ESPN's TOP 10 ALL-TIME ATHLETES","Value":"$200","Question":"No. 2 1912 Olympian; football star at Carlisle Indian School; 6 MLB seasons with the Reds, Giants & Braves","Answer":"Jim Thorpe"}' http://localhost:5000/questions/
+
+curl -H "Content-Type: application/json" -X POST -d '{"Show Number":"4680","Air Date":"2004-12-31","Round":"Jeopardy!","Category":"EVERYBODY TALKS ABOUT IT...","Value":"$200","Question":"The city of Yuma in this state has a record average of 4,055 hours of sunshine each year","Answer":"Arizona"}' http://localhost:5000/questions/
+
+curl -H "Content-Type: application/json" -X POST -d '{"Show Number":"4680","Air Date":"2004-12-31","Round":"Jeopardy!","Category":"ESPNs TOP 10 ALL-TIME ATHLETES","Value":"$200","Question":"No 2 1912 Olympian football star at Carlisle Indian School 6 MLB seasons with the Reds Giants & Braves","Answer":"Jim Thorpe"}' http://localhost:5000/questions/
+
+
+curl -H "Content-Type: application/json" -X POST -d '{"Show Number":"4680","Air Date":"2004-12-31","Round":"Jeopardy!","Category":"HISTORY","Value":"$200","Question":"For the last 8 years of his life, Galileo was under house arrest for espousing this man\u0027s theory","Answer":"Copernicus"}' http://localhost:5000/questions/
